@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
+import os
+
+
+PORT = int(os.getenv("PORT", "8000"))
+
 
 app = FastAPI(title="FastAPI assignment", version="1.0.0")
 
@@ -12,6 +17,11 @@ class Item(BaseModel):
     name: str
     description: Optional[str] = None
 
+
+#New health check endpoint for Task 2
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 
 @app.get("/")
