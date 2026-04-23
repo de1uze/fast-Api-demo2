@@ -155,3 +155,52 @@ Open Docker Desktop and wait for it to fully start, then try again.
 ```bash
 docker compose logs -f
 ```
+
+
+---
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions to automatically build the Docker image on every push to `main`.
+
+You can see the build status in the **Actions** tab on GitHub.
+
+The pipeline:
+1. Spins up a fresh Linux machine
+2. Checks out your code
+3. Builds the Docker image
+4. Shows green checkmark if successful
+
+No manual steps needed — just push your code and GitHub handles the rest.
+
+---
+
+## One-Command Deployment
+
+Use the deploy script to stop, rebuild, and restart the app in one go:
+
+```bash
+chmod +x deploy.sh   # only needed once
+./deploy.sh
+```
+
+The script will:
+1. Stop any running container
+2. Build a fresh Docker image
+3. Start the container
+4. Confirm the app is healthy
+
+To deploy on a different port:
+```bash
+PORT=9000 ./deploy.sh
+```
+
+---
+
+## Viewing Logs
+
+```bash
+docker compose logs -f
+```
+
+Live logs will show every request hitting the API with timestamps.
